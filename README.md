@@ -1,1 +1,1 @@
-# Image-Caption-Generation-Using-Maachine-Learning
+# Image-Caption-Generation-Using-Machine-Learning
