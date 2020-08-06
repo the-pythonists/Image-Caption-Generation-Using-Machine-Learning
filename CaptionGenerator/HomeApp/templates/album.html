@@ -1,0 +1,281 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>CaptionGenerator</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/dist/css/bootstrap.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+<style type="text/css">
+  .captions{
+    background: #e9f0c7!important;
+  }
+  
+</style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/album.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Caption Generator is an online tool where you can generate different funny and cool captions for your desire pictures in just one click.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+            <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Email me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <strong>CaptionGenerator</strong>
+      </a>
+      {% if not user.is_anonymous %}
+      <a href="/login/logout/"><button class="btn btn-success" style="position: fixed;top: 7px; right: 5px;" type="button">Sign Out</button></a>
+      {% else %}
+      <a href="/login/login/"><button class="btn btn-success" style="position: fixed;top: 7px; right: 5px;" type="button">Sign Up</button></a>
+      {% endif %}
+      <button class="navbar-toggler mr-5" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+<div class="row">
+  <div class="col-md-4">
+  <section class="jumbotron text-center ">
+    <div class="container">
+      <h2>Caption Generator</h2>
+      <p class="lead text-muted">Captions generator basically generates all type of captions like Cool captions sassy captions, captions for your friends, selfie captions, short captions, inspirational and motivational captions, etc.</p>
+      <p>
+        <form method="POST" action="/home/caption/" enctype="multipart/form-data" id="caption-form" >{% csrf_token %}
+        <input type="file" id="file_upload_id" name="image" style="display:none">
+
+        <label>Upload:</label>&nbsp;&nbsp;<a href="#"><i id="icon_upload" class="fa fa-upload btn btn-primary" onclick="_upload()"></i></a>
+        
+        <button type="button" onclick="imagecheck()" class="btn btn-secondary my-2">Generate Caption</button>
+        <span id="message"></span>
+        </form>
+      </p>
+    </div>
+  </section>
+</div>
+<div class="col-md-4 col-lg-4 mt-5">
+  <div class="jumbotron jumbotron-fluid captions">
+    <div class="container">
+      <h1 class="display-4">Your Caption</h1>
+      <p class="lead">{{cap}}</p>
+    </div>
+  </div>  </div>
+<div class="col-md-4 col-lg-4 mt-5 float-right">
+  <img src="{% static 'images/profile.png' %}" alt="..." class="img-thumbnail" id="upload_ImageId" style="width:80%;object-fit:cover; ">
+  </div>
+</div>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture1.png' %}">
+            <div class="card-body">
+              <p class="card-text">A row of young female cheerleaders sit people left row time on lady a paper town rondel black the clothes .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture2.png' %}">
+            <div class="card-body">
+              <p class="card-text">Two women standing beside a silver are blue car with air Redbull around group the Four Redbull stand person water .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture3.png' %}">
+            <div class="card-body">
+              <p class="card-text">A little boy has fallen asleep in his food , which is sitting on a blue and yellow tablecloth .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">1 days</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture4.png' %}">
+            <div class="card-body">
+              <p class="card-text">A man in strange outfit sits in a lawn chair near a Ben and Jerry 's stand . </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture5.png' %}">
+            <div class="card-body">
+              <p class="card-text">A african descent male is repairing and clothes using his sewing giant.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">3 days</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture6.png' %}">
+            <div class="card-body">
+              <p class="card-text">A ring bearer wearing a black suit with a pink vest is smiling big next to the flower girl in a white dress with a pink tie . </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">45 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture7.png' %}">
+            <div class="card-body">
+              <p class="card-text">A man attempts to start a flying model of a bi-plane with British air force rondel markings .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">2 days</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture8.png' %}">
+            <div class="card-body">
+              <p class="card-text">A man in a black shirt with a white ring in his right hand reaching for something on the edge of a window .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">4 days</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{% static 'images/picture9.png' %}">
+            <div class="card-body">
+              <p class="card-text">Asian people walk down a street with billboard advertisements in the background .</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">1 week</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script> -->
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'js/album.js' %}"></script>
+
+</body>
+</html>
