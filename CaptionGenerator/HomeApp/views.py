@@ -10,11 +10,7 @@ with open('HomeApp/caption.pkl', 'rb') as fin:
     model_loaded = pickle.load(fin)
 
 def home(request):
-    user = request.session['user']
-    if user:
-        return render(request,'album.html',{'user':user})
-    else:
-        return render(request,'album.html')
+    return render(request,'album.html',)
 
 def caption(request):
     # reading image
