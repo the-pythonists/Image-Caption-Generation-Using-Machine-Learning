@@ -1,7 +1,7 @@
 # Image-Caption-Generation-Using-Machine-Learning
 
 This project is based on ***Caption Generator*** through which you can generate Your own caption according to the image.  
-In this repo, YOLO algorithm is used for the object detection and Django is used for HTTP server.
+For generating a caption, YOLO algorithm is used for the object detection and Django is used for HTTP server.
 # Screenshots
 ![Home Page](https://github.com/the-pythonists/Image-Caption-Generation-Using-Machine-Learning/blob/master/Screenshots/image4.jpg)  
 
